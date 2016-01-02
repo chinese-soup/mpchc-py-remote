@@ -24,9 +24,11 @@ def main(command, base_ip):
 		r = requests.post("http://{0}/command.html".format(base_ip), data=rdata, timeout=3)
 		print("Response: {0}".format("OK (200)" if r.status_code == 200 else "Probably failed."))
 	except requests.exceptions.ConnectTimeout:
-		print("Error: Request timed out, check if the web interface is actually running on the URL you provided.")
+		print("Request error: Timed out, check if the web interface is actually running on the URL you provided or try raising the timeout period using --timeout.")
+	except requests.exceptions.RequestException as e:
+		print("Request error: Error.", e)
 	except Exception as e:
-		print("Unknown error.", str(e))
+		print("Unknown error.", e)
 
 if __name__ == "__main__":
 	# todo: config parse (baseurl + command prefs)
