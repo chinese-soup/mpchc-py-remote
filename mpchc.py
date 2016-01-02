@@ -9,8 +9,8 @@ import sys, os, requests, argparse, json
 # jf = small jump forwards
 # jb = small jump backwards
 
-cmds = {"p": 889, "n": 922, "b": 921, "f": 830, "jf": 900, "jb": 899} # todo: parse from a config 
-cmds_t = {"p": "Play", "n": "Next (Chapter/File)", "b": "Prev (Chapter/File)", "f": "Toggle fullscreen", "jf": "Small forward jump", "jb": "Small backward jump"}
+cmds = {"p": 889, "n": 922, "b": 921, "f": 830, "jf": 900, "jb": 899, "s": 890, "+": 907, "-": 908, "m": 909} # todo: parse from a config 
+cmds_t = {"p": "Play/Pause", "n": "Next (Chapter/File)", "b": "Prev (Chapter/File)", "f": "Toggle fullscreen", "jf": "Small forward jump", "jb": "Small backward jump", "s": "Stop", "+": "Volume up", "-": "Volume down", "m": "Volume mute (toggle)"}
 
 def main(command, base_ip):
 	cmd = command  # temporary
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 			print("Type a command or 'quit' to quit and press Enter.")
 			while True:
 				acmd = input("> ")
-				if acmd != "quit" and acmd != "":
+				if acmd != "quit":
 					if(acmd in cmds):
 						main(str(acmd), args.ip)
 					else:
