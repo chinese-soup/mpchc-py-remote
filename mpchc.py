@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # coding=utf-8
-import sys, os, requests, argparse, json
+import sys, requests, argparse, json, time
 
 # p = play
 # n = next (ch)
@@ -46,7 +46,10 @@ if __name__ == "__main__":
 			print("Type either a command or 'quit' and submit using Enter.")
 			while True:
 				acmd = input("> ")
-				if acmd != "quit":
+				if acmd.startswith("sleep"):
+					t_sleep = float(acmd.split(" ")[1])
+					time.sleep(t_sleep)
+				elif acmd != "quit":
 					if(acmd in cmds):
 						main(str(acmd), args.ip)
 					else:
