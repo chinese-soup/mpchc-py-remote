@@ -34,13 +34,13 @@ if __name__ == "__main__":
 	# todo: optional curses
 	aparser = argparse.ArgumentParser()
 	aparser.add_argument("--ip", help="Base IP:PORT where a MPC-HC web interface is listening")
-	aparser.add_argument("--ui", help="Available options: none (default)|text|curses")
+	aparser.add_argument("--ui", help="Available options: none (default)|text|curses-line|curses")
 	aparser.add_argument("--timeout", help="Force a non-default (3 second) timeout for the request. (Use if you are running into timeout exceptions a lot.)")
 	aparser.add_argument("command") # TODO: flag this as optional when using --ui text | curses ofc
 	args = aparser.parse_args()
 	if args.ip:
 		if args.ui == "text":
-			print("Type a command or 'quit' to quit and press Enter:")
+			print("Type a command or 'quit' to quit and press Enter.")
 			while True:
 				acmd = input("> ")
 				if acmd != "quit" and acmd != "":
