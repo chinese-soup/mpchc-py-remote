@@ -1,6 +1,12 @@
 # mpchc-py-remote
 A cli-wrapper for Media Player Classic: Home Cinema's remote web interface using Python
 
+## Depencies
+Currently the only depency is [python-requests](http://docs.python-requests.org/en/latest/user/install/), which you can install using pip or easy_install:
+```
+pip install requests
+```
+
 ## Usage
 There are four modes of the remote control wrapper available:
 * Send one command and quit (default, called none)
