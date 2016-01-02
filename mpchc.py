@@ -1,39 +1,57 @@
 #!/usr/bin/python3
 # coding=utf-8
 import sys, os, requests, argparse, json
- 
-def main(command, base_url):
+
+# p = play
+# n = next (ch)
+# b = previous (ch)
+# f = toggle fullscreen
+# jf = small jump forwards
+# jb = small jump backwards
+
+cmds = {"p": 889, "n": 922, "b": 921, "f": 830, "jf": 900, "jb": 899} # todo: parse from a config 
+cmds_t = {"p": "Play", "n": "Next (Chapter/File)", "b": "Prev (Chapter/File)", "f": "Toggle fullscreen", "jf": "Small forward jump", "jb": "Small backward jump"}
+
+def main(command, base_ip):
 	cmd = command  # temporary
-	print("CMD is", ord(cmd))
-	cmds = {"p": 889, "n": 922, "b": 921, "f": 830, "jf": 900, "jb": 899}
 	rcmd = cmds[cmd]
+	rcmd_t = cmds_t[cmd]
 	rdata = {"wm_command": rcmd}
+	
+	print("Requested: {0}".format(rcmd_t))
+
 	try:
-		r = requests.post("{0}/command.html".format(base_url), data=rdata, timeout=4)
+		r = requests.post("http://{0}/command.html".format(base_ip), data=rdata, timeout=3)
+		print("Response: {0}".format("OK (200)" if r.status_code == 200 else "Probably failed."))
 	except requests.exceptions.ConnectTimeout:
 		print("Error: Request timed out, check if the web interface is actually running on the URL you provided.")
-	except:
-		print("Unknown error.")
+	except Exception as e:
+		print("Unknown error.", str(e))
 
 if __name__ == "__main__":
 	# todo: config parse (baseurl + command prefs)
 	# todo: cleanup
 	# todo: optional curses
 	aparser = argparse.ArgumentParser()
-	aparser.add_argument("--url", help="Base url on which mpc-hc web iface is")
+	aparser.add_argument("--ip", help="Base IP:PORT where a MPC-HC web interface is listening")
 	aparser.add_argument("--ui", help="Available options: none (default)|text|curses")
-	aparser.add_argument("command")
+	aparser.add_argument("--timeout", help="Force a non-default (3 second) timeout for the request. (Use if you are running into timeout exceptions a lot.)")
+	aparser.add_argument("command") # TODO: flag this as optional when using --ui text | curses ofc
 	args = aparser.parse_args()
-	if args.url:
+	if args.ip:
 		if args.ui == "text":
+			print("Type a command or 'quit' to quit and press Enter:")
 			while True:
-				acmd = input("Type a command or 'quit' and press Enter: ")
-				if acmd != "quit":
-					main(str(acmd), args.url)
+				acmd = input("> ")
+				if acmd != "quit" and acmd != "":
+					if(acmd in cmds):
+						main(str(acmd), args.ip)
+					else:
+						print("Command not found (locally).")
 				else:
 					sys.exit(0)
 		
-		else:
-			main(args.command, args.url)
+		elif args.ui is None or args.ui == "none":
+			main(args.command, args.ip)
 	else:
-		print("You need to specify a URL of the remote web interface using the --url argument.")
+		print("You need to specify an IP of the remote web interface using the --url argument.")
