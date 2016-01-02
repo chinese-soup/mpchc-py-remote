@@ -35,14 +35,15 @@ if __name__ == "__main__":
 	# todo: cleanup
 	# todo: optional curses
 	aparser = argparse.ArgumentParser()
-	aparser.add_argument("--ip", help="Base IP:PORT where a MPC-HC web interface is listening")
-	aparser.add_argument("--ui", help="Available options: none (default)|text|curses-line|curses")
-	aparser.add_argument("--timeout", help="Force a non-default (3 second) timeout for the request. (Use if you are running into timeout exceptions a lot.)")
+	aparser.add_argument("--ip", "-c", help="Base IP:PORT where a MPC-HC web interface is listening")
+	aparser.add_argument("--ui", "-i", help="Choose an interface. Available options: none (default)|text|curses-line|curses")
+	aparser.add_argument("--timeout", "-t", help="Force a non-default (3 second) timeout for the request. (Use if you are running into timeout exceptions a lot.)")
 	aparser.add_argument("command") # TODO: flag this as optional when using --ui text | curses ofc
 	args = aparser.parse_args()
+
 	if args.ip:
 		if args.ui == "text":
-			print("Type a command or 'quit' to quit and press Enter.")
+			print("Type either a command or 'quit' and submit using Enter.")
 			while True:
 				acmd = input("> ")
 				if acmd != "quit":
@@ -51,9 +52,10 @@ if __name__ == "__main__":
 					else:
 						print("Command not found (locally).")
 				else:
+					print("Exiting.")
 					sys.exit(0)
 		
 		elif args.ui is None or args.ui == "none":
 			main(args.command, args.ip)
 	else:
-		print("You need to specify an IP of the remote web interface using the --url argument.")
+		print("You need to specify an IP of the remote web interface using the --ip argument.")
