@@ -70,10 +70,10 @@ if __name__ == "__main__":
 				sys.exit(0)
 	
 	elif args.command is None:
-		print("You didn't specify a command. Did you mean to you an interactive mode? Run with \"-i text\" or \"-i curses\".")
+		print("You didn't specify a command. Did you mean to run in an interactive mode? Run with \"-i text\" or \"-i curses\".")
 		sys.exit(1)
 	elif args.ui is None or args.ui == "none" and args.command is not None:
 		main(args.command, args.ip or config.settings["ip"], args.port or config.settings["port"])
-		
+
 	#else:
 	#	print("You need to specify an IP of the remote web interface using the --ip argument.")
