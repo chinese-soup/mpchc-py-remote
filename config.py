@@ -2,7 +2,7 @@
 # See the command_help.md file for command number codes you can use. #
 
 settings = {
-	"ip": "192.168.0.105", 
+	"ip": "127.0.0.1", 
 	"port": "3333",
 	"timeout": 3
 }
