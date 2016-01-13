@@ -11,7 +11,6 @@ pip install requests
 There are four modes of the remote control wrapper available:
 * Send one command and quit (default, called none)
 * Looped input command line for inputting commands until you want to quit (text)
-* Instantly sent input command line using curses (no need to press the Enter key like with the mode above) (curses-line) (TODO)
 * Curses interface (TODO) (curses)
 
 ```
