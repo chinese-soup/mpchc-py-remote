@@ -1,6 +1,6 @@
 # mpchc-py-remote
-A cli-wrapper for Media Player Classic: Home Cinema's remote web interface using Python3
-
+A cli-wrapper for Media Player Classic: Home Cinema's remote web interface using Python
+3tra
 ## Depencies
 Currently the only depency is [python-requests](http://docs.python-requests.org/en/latest/user/install/), which you can install using pip or easy_install:
 ```
@@ -9,9 +9,9 @@ pip3 install requests
 
 ## Usage
 There are four modes of the remote control wrapper available:
-* Send one command and quit (default, called none)
-* Looped input command line for inputting commands until you want to quit (text)
-* Curses interface (TODO) (curses)
+* **none**: Send one command and quit (default)
+* **text**: Looped input command line for inputting commands until you want to quit (can be used to script using the <<< shell redirection, use sleep X to sleep for X seconds)
+* **curses**: Curses interface (TODO)
 
 ```
 usage: mpchc.py [-h] [--ip IP] [--port PORT] [--ui UI] [--timeout TIMEOUT]
