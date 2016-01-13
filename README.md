@@ -15,16 +15,24 @@ There are four modes of the remote control wrapper available:
 * Curses interface (TODO) (curses)
 
 ```
-usage: mpchc.py [-h] [--ip IP] [--ui UI] [--timeout TIMEOUT] command
+usage: mpchc.py [-h] [--ip IP] [--port PORT] [--ui UI] [--timeout TIMEOUT]
+                command
 
 positional arguments:
   command
 
 optional arguments:
-  -h, --help         show this help message and exit
-  --ip IP            Base IP:PORT where a MPC-HC web interface is listening
-  --ui UI            Available options: none (default)|text|curses-line|curses
-  --timeout TIMEOUT  Force a non-default (3 second) timeout for the request.
-                     (Use if you are running into timeout exceptions a lot.)
+  -h, --help            show this help message and exit
+  --ip IP, -c IP        Specify the IP/hostname where a MPC-HC web interface
+                        is listening. Use this to override the config values.
+  --port PORT, -p PORT  Specify the PORT on which MPC-HC web interface is
+                        listening on. Use this to override the config values.
+  --ui UI, -i UI        Choose an interface. Available options: none
+                        (default)|text|curses.
+  --timeout TIMEOUT, -t TIMEOUT
+                        Force a non-default (3 second) timeout for the
+                        request. (Use if you are running into timeout
+                        exceptions a lot.)
+
 ```
 
